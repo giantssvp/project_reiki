@@ -49,7 +49,7 @@
 
             <div id="templatemo_menu">
                 <ul>
-                    <li>@Html.ActionLink("Home", "Index")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Services", "Services", "Home")</li>
                     <li>@Html.ActionLink("Booking", "Booking", "Home")</li>
@@ -78,9 +78,9 @@
 
                 <div id="templatemo_main">
                     <h4 align="center">
-                        <a runat="server" href="~/Booking">Booking</a> <font color="#af0083">|</font>
-                        <a runat="server" href="~/Privacy">Privacy Policy</a> <font color="#af0083">|</font>
-                        <a runat="server" href="~/Disclaimer" class="current">Disclaimer</a>
+                        @Html.ActionLink("Booking", "Booking")
+                        @Html.ActionLink("Privacy", "Privacy")
+                        @Html.ActionLink("Disclaimer", "Disclaimer")
                     </h4>
 
                     <div class="content_box">
