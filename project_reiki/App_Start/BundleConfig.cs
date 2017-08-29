@@ -9,7 +9,10 @@ namespace project_reiki
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-1.1.3.1.pack.js",
+                        "~/Scripts/jquery.tabs.pack.js",
+                        "~/Scripts/jquery.history_remote.pack.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,8 +27,8 @@ namespace project_reiki
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/jquery.tabs.css",
+                      "~/Content/templatemo_style.css"));
         }
     }
 }

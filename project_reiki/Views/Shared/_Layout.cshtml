@@ -1,42 +1,129 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head> 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Reiki Healing</title>
+        
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script type="text/javascript">
+	$(function() {
+
+		$('#container-4').tabs({ fxFade: true, fxSpeed: 'slow' });
+
+	});
+    </script>
+
+    <style type="text/css" media="screen, projection">
+        #templatemo_middle {
+            overflow: hidden;
+            width: 960px;
+            height: 320px;
+        }
+    </style>
+    <style>
+        .mySlides {
+            display: none;
+        }
+    </style>
+    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <div id="templatemo_body_wrapper">
+        <div id="templatemo_wrapper">
 
+            <div id="templatemo_header">
+                <div id="site_title">
+                    <br />
+                    <h1><font color="#af0083">Reiki and Healing House</font></h1>
+                </div>
+                <!-- end of site_title -->
+            </div><!-- end of header -->
+
+            <div id="templatemo_menu">
+                <ul>
+                    <li>@Html.ActionLink("Home", "Index", "Home" )</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                </ul>
+            </div> <!-- end of menu -->
+
+            <div id="templatemo_middle">
+                <img class="mySlides" src="images/templatemo_middle.jpg" style="width:100%" />
+                <img class="mySlides" src="images/templatemo_middle1.jpg" style="width:100%" />
+                <img class="mySlides" src="images/templatemo_middle2.jpg" style="width:100%" />
+                <img class="mySlides" src="images/templatemo_middle3.jpg" style="width:100%" />
+
+                <div id="container-4">
+                    <div>
+                        <h1><font color="#af0083">Moksh Reiki House</font></h1>
+                        <p>Moksh as the name means to liberate onself, was started with a vision to receive and shaer in abundance.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="templatemo_main_base">
+
+                <div id="templatemo_main">
+                    <h4 align="center">
+                        <a runat="server" href="~/Booking">Booking</a> <font color="#af0083">|</font>
+                        <a runat="server" href="~/Privacy">Privacy Policy</a> <font color="#af0083">|</font>
+                        <a runat="server" href="~/Disclaimer" class="current">Disclaimer</a>
+                    </h4>
+
+                    <div class="content_box">
+                        @RenderBody()
+                    </div>
+
+
+
+
+
+                </div>
+            </div>	<!-- end of main_base -->
+            <div id="templatemo_main_bottom"></div>
+
+            <div id="templatemo_footer">
+
+                <a runat="server" href="~/Index" class="current">Home</a> | <a runat="server" href="~/About">About Us</a> | <a runat="server" href="~/Services">Services</a> | <a runat="server" href="~/Booking">Booking</a> | <a runat="server" href="~/Testimony">Testimony</a> | <a runat="server" href="~/Contact">Contact Us</a> <br /><br />
+                Copyright © 2017 <a href="#">Reiki and Healing House pvt ltd</a>
+
+            </div> <!-- end of footer -->
+
+            <div class="cleaner"></div>
+        </div> <!-- end of wrapper -->
+    </div> <!-- end of body_wrapper -->
+
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+    </script>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required:false)
 </body>
 </html>
