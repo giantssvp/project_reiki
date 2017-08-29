@@ -78,9 +78,10 @@
 
                 <div id="templatemo_main">
                     <h4 align="center">
-                        @Html.ActionLink("Booking", "Booking")
-                        @Html.ActionLink("Privacy", "Privacy")
+                        @Html.ActionLink("Booking", "Booking") | 
+                        @Html.ActionLink("Privacy", "Privacy") | 
                         @Html.ActionLink("Disclaimer", "Disclaimer")
+
                     </h4>
 
                     <div class="content_box">
@@ -97,8 +98,8 @@
 
             <div id="templatemo_footer">
 
-                <a runat="server" href="~/Index" class="current">Home</a> | <a runat="server" href="~/About">About Us</a> | <a runat="server" href="~/Services">Services</a> | <a runat="server" href="~/Booking">Booking</a> | <a runat="server" href="~/Testimony">Testimony</a> | <a runat="server" href="~/Contact">Contact Us</a> <br /><br />
-                Copyright © 2017 <a href="#">Reiki and Healing House pvt ltd</a>
+                @Html.ActionLink("Home", "Index") | @Html.ActionLink("About Us", "About") | @Html.ActionLink("Services", "Services") | @Html.ActionLink("Booking", "Booking") | @Html.ActionLink("Testimony", "Testimony") | @Html.ActionLink("Contact Us", "Contact") <br /><br />
+                Copyright © 2017 Reiki and Healing House pvt ltd
 
             </div> <!-- end of footer -->
 

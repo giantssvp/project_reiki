@@ -26,5 +26,30 @@ namespace project_reiki.Controllers
 
             return View();
         }
+
+        public ActionResult Services()
+        {
+            return View();
+        }
+
+        public ActionResult Privacy()
+        {
+            return View();
+        }
+
+        public ActionResult Testimony()
+        {
+            return View();
+        }
+
+        public ActionResult Disclaimer()
+        {
+            return View();
+        }
+
+        public ActionResult Booking()
+        {
+            return View();
+        }
     }
 }
