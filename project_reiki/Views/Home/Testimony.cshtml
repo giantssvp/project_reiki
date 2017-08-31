@@ -2,7 +2,16 @@
 @{
     ViewBag.Title = "Testimony";
 }
+@{ 
+    var results = ViewBag.list;
+}
 
+@foreach (var item in results)
+{
+    <p>
+    @item[0]
+    </p>
+}
 <h1 align="center"><font color="#af0083">Reiki and Healing House Testimonial!</font></h1>
 
 <h4 align="center"><font color="#af0083">Shyam from  India</font></h4>

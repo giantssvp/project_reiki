@@ -9,18 +9,18 @@
 
         <h4>Quick Contact Form</h4>
 
-        <form runat="server">
+        <form>
 
-            <label for="author">Name:</label> <input runat="server" name="author" type="text" class="input_field" id="name" maxlength="50" />
+            <label for="author">Name:</label> <input name="name" type="text" class="input_field" id="name" maxlength="50" />
             <div class="cleaner_h10"></div>
 
-            <label for="email">Email:</label> <input runat="server" name="email" type="text" class="input_field" id="email" maxlength="50" />
+            <label for="email">Email:</label> <input name="email" type="text" class="input_field" id="email" maxlength="50" />
             <div class="cleaner_h10"></div>
 
-            <label for="subject">Subject:</label> <input runat="server" name="subject" type="text" class="input_field" id="subject" maxlength="50" />
+            <label for="subject">Subject:</label> <input name="subject" type="text" class="input_field" id="subject" maxlength="50" />
             <div class="cleaner_h10"></div>
 
-            <label for="text">Message:</label> <textarea runat="server" id="message" name="text" rows="0" cols="0" class="required"></textarea>
+            <label for="text">Message:</label> <textarea id="message" name="message" rows="0" cols="0" class="required"></textarea>
             <div class="cleaner_h10"></div>
 
             <input type="submit" class="submit_btn float_l" name="submit" id="submit" value="Send" onserverclick="submit_button_click" />
