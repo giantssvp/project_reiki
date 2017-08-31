@@ -268,6 +268,27 @@ em { color: #000; }
 
 #contact_form form .submit_btn { margin: 10px 0px; padding: 5px 14px; border: 1px solid #ccc; background: #fff; }
 
+#booking_form form .submit_btn { margin: 10px 0px; padding: 5px 14px; border: 1px solid #ccc; background: #fff; }
+
+#booking_form form .input_field {
+    color: #333;
+    width: 150px;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #f6f6f6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border: 1px solid #cfcfcf;
+}
+
+#booking_form form label {
+    display: block;
+    width: 100px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+
 #templatemo_main_bottom {
 	width: 960px;
 	height: 10px;

@@ -9,25 +9,11 @@
 <div class="cleaner"></div>
         </div>
 
-<style>
-	form .input_field{
-    color: #333;
-	width: 150px;
-	padding: 5px;
-	margin-bottom: 10px;
-	background: #f6f6f6;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	border: 1px solid #cfcfcf;
-    }
-    label { display: block; width: 100px; margin-right: 10px; font-size: 14px; }
-</style>
-
-
 <div class="content_box">
     <div class="col_w4101" align="center">
 
-        <div class="hp_news_box">
+        <div class="hp_news_box" id="booking_form">
+            <form>
             <p class="date"></p>
             <label>Date: </label>
             <input class="input_field" type="text" name="date" id="datepicker" /><br /><br />
@@ -44,8 +30,8 @@
                 <option value="saab">Distance Healing</option>
                 <option value="mercedes">Pellowah</option>
             </select></br><br />
-            <input type="button" name="submit" value="Book Now" />
-
+            <input type="submit" class="submit_btn" name="submit" value="Book Now" />
+            </form>
         </div>
 
     </div>
