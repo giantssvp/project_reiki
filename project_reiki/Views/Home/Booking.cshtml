@@ -52,7 +52,6 @@
         $(document).ready(function () {
             $('#datepicker').change(function () {
                 var date = $(this).val();
-                alert(date);
                 $.ajax({
                     type: "GET",
                     url: "get_time_slots",
@@ -60,7 +59,6 @@
                     dataType: 'json',
                     success: function (d) {
                         var list = d.c;
-                        alert(list);
                         $("#time_slot").html(""); 
                         $.each(list, function (index, value) {                            
                             var am_pm = " PM";
@@ -83,10 +81,6 @@
                         alert(err.responseText);
                     },
                 });
-
-                //$.get('@Url.Action("get_time_slots", "Home")', { "date": yourText }, function (data) {
-                //    alert("message");
-                //});
             });
         });
 

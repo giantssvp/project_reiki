@@ -73,7 +73,6 @@ namespace project_reiki.Controllers
         [HttpGet]
         public ActionResult get_time_slots(string date)
         {
-            System.Windows.Forms.MessageBox.Show("called " + date);
             var obj = new db_connect();
             List<string>[] list_time = new List<string>[1];
             list_time = obj.time_slot_show(date);
@@ -84,14 +83,10 @@ namespace project_reiki.Controllers
             List<int> c = b.Except(a).ToList();
             ViewBag.time_list = c;
             ViewBag.time_cnt = list_time[0].Count();
-            System.Windows.Forms.MessageBox.Show(String.Join(",", c.ToArray()));
-            //return Json(details, JsonRequestBehavior.AllowGet);
             return Json(new
             {
                 c = c
             }, JsonRequestBehavior.AllowGet);
-            //return View(c);
-            //return RedirectToAction("Booking", "Home",c);
         }
     }
 }
