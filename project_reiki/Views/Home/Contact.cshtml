@@ -9,7 +9,7 @@
 
         <h4>Quick Contact Form</h4>
 
-        <form>
+        <form method="post" action=@Url.Action("submit_btn_contact", "Home")>
 
             <label for="author">Name:</label> <input name="name" type="text" class="input_field" id="name" maxlength="50" />
             <div class="cleaner_h10"></div>
@@ -34,7 +34,7 @@
 <div class="col_w410 last_col">
     <h4>Mailing Address</h4>
     <h6><strong>Lakshmi Madhavan</strong></h6>
-    190-220 street no, <br />
+    190-220 Street no, <br />
     Sydney, 10110<br />
     Australia<br />
     <br />

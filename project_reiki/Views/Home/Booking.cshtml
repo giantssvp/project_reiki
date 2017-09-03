@@ -5,46 +5,40 @@
 
 <h1 align="center"><font color="#af0083">Book your session!</font></h1>
 
-
 <div class="cleaner"></div>
         </div>
 
 <div class="content_box">
     <div class="col_w4101" align="center">
-
         <div class="hp_news_box" id="booking_form">
-            <form>
-            <p class="date"></p>
-            <label>Date: </label>
-            <input class="input_field" type="text" name="date" id="datepicker" /><br /><br />
-            <label>Time: </label>
-            <select class="input_field">
-                <option value="volvo">8-9 AM</option>
-                <option value="saab">9-10 AM</option>
-                <option value="mercedes">4-5 PM</option>
-                <option value="audi">5-6 PM</option>
-            </select></br><br />
-            <label>Session: </label>
-            <select class="input_field">
-                <option value="volvo">Reiki</option>
-                <option value="saab">Distance Healing</option>
-                <option value="mercedes">Pellowah</option>
-            </select></br><br />
-            <input type="submit" class="submit_btn" name="submit" value="Book Now" />
+            <form method="post" action=@Url.Action("submit_btn_booking", "Home") >
+                <p class="date"></p>
+            
+                <label>Date: </label>
+                <input class="input_field" type="text" name="date" id="datepicker" /><br /><br />
+            
+                <label>Time: </label>
+                <select class="input_field" name="time_slot" id="time_slot">    </select> <br /> <br />
+             
+                <label>Session: </label>
+                <select class="input_field" name="session_name">
+                    <option value="Reiki">Reiki</option>
+                    <option value="Distance Healing">Distance Healing</option>
+                    <option value="Pellowah">Pellowah</option>
+                </select> <br /> <br />
+                <input type="submit" class="submit_btn" name="submit" value="Book Now" />
             </form>
         </div>
-
     </div>
-
     <div class="cleaner"></div>
-
-
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -54,9 +48,49 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datepicker').change(function () {
+                var date = $(this).val();
+                alert(date);
+                $.ajax({
+                    type: "GET",
+                    url: "get_time_slots",
+                    data: { date: date },
+                    dataType: 'json',
+                    success: function (d) {
+                        var list = d.c;
+                        alert(list);
+                        $("#time_slot").html(""); 
+                        $.each(list, function (index, value) {                            
+                            var am_pm = " PM";
+                            if (value == 10)
+                            {
+                                am_pm = " AM";
+                            }
+                            if (value == 12)
+                            {
+                                var time = String(pad(value)) + " - 01" + am_pm;
+                            }
+                            else
+                            {
+                                var time = String(pad(value)) + " - " + String(pad(value + 1)) + am_pm;
+                            } 
+                            $("#time_slot").append($('<option></option>').val(value).html(time)); 
+                        });
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    },
+                });
 
+                //$.get('@Url.Action("get_time_slots", "Home")', { "date": yourText }, function (data) {
+                //    alert("message");
+                //});
+            });
+        });
 
-
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        function pad(n) {
+            return (n < 10) ? ("0" + n) : n;
+        }
+    </script>

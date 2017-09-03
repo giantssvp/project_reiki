@@ -10,6 +10,7 @@ namespace project_reiki.Models
     {
         private MySqlConnection connection;
         public List<string>[] list_feedback_show = new List<string>[3];
+        public List<string>[] list_time_show = new List<string>[1];
         public List<string>[] list_gallery_show = new List<string>[2];
 
         private bool OpenConnection()
@@ -24,6 +25,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return false;
             }
         }
@@ -37,6 +39,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return false;
             }
         }
@@ -68,6 +71,36 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                return -1;
+            }
+        }
+
+        public int Insert_Booking(string start_time, string session_type, string date)
+        {
+            try
+            {
+                int id = -1;
+                string query = "INSERT INTO booking (Start_time, Session_type, Date) VALUES(@time, @session, @dt)";
+                
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@time", start_time);
+                    cmd.Parameters.AddWithValue("@session", session_type);
+                    cmd.Parameters.AddWithValue("@dt", date);
+                    cmd.ExecuteNonQuery();
+
+                    MySqlCommand cmd1 = new MySqlCommand("SELECT LAST_INSERT_ID()", connection);
+                    id = Convert.ToInt32(cmd1.ExecuteScalar());
+
+                    this.CloseConnection();
+                }
+                return id;
+            }
+            catch (MySqlException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return -1;
             }
         }
@@ -76,7 +109,8 @@ namespace project_reiki.Models
         {
             try
             {
-                string query = "SELECT * FROM testimony ORDER BY Date DESC, ID DESC LIMIT 2 OFFSET @offset";
+                //string query = "SELECT * FROM testimony ORDER BY Date DESC, ID DESC LIMIT 2 OFFSET @offset";
+                string query = "SELECT * FROM testimony";
 
                 list_feedback_show[0] = new List<string>();
                 list_feedback_show[1] = new List<string>();
@@ -106,13 +140,48 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return list_feedback_show;
             }
         }
 
-    }
+        public List<string>[] time_slot_show(string date)
+        {
+            try
+            {
+                string query = "SELECT start_time FROM booking where date = @date";
 
+                list_time_show[0] = new List<string>();
+                //list_feedback_show[1] = new List<string>();
+                //list_feedback_show[2] = new List<string>();
 
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
 
-}
+                    while (dataReader.Read())
+                    {
+                        list_time_show[0].Add(dataReader["start_time"] + "");
+                    }
+
+                    dataReader.Close();
+                    this.CloseConnection();
+                    return list_time_show;
+                }
+                else
+                {
+                    return list_time_show;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                return list_time_show;
+            }
+        }
+
+    } //db_connect class
+} // namespace
 

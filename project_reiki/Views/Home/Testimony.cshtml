@@ -4,17 +4,23 @@
 }
 @{ 
     var results = ViewBag.list;
+    int cnt = ViewBag.total;
 }
 
-@foreach (var item in results)
-{
-    <p>
-    @item[0]
-    </p>
-}
 <h1 align="center"><font color="#af0083">Reiki and Healing House Testimonial!</font></h1>
 
-<h4 align="center"><font color="#af0083">Shyam from  India</font></h4>
+@for (var i = 0; i < cnt; i++)
+{
+        <h4 align="center"><font color="#af0083">@results[0][i]</font></h4>
+    <p>
+        <font size="4" color="#0b6d1a">
+            @results[1][i]
+        </font>
+    </p>        
+        @results[2][i]    
+}
+<!--
+    <h4 align="center"><font color="#af0083">Shyam from  India</font></h4>
 <p>
     <font size="4" color="#0b6d1a">
         I came across Betsy's website in November of 2016 and eventually decided to experience a healing session. She was very prompt and helpful in clearing all my queries and I decided to
@@ -32,3 +38,4 @@
 <p> <font size="4" color="#0b6d1a"> Thank you very much for the healing. I really felt the energy and a huge sense of peace. Interesting, I was thinking during the healing if it is possible to live a life feeling like this? And then you sent these recommendations, which I believe are an answer to my question. After the healing, I needed to go to a celebration and I was very surprised how LOVE was just flowing out of me. It was as if I really was connected with other people in a new way. The next day I had an appointment to work through some family concerns and I really believe your healing helped me through a tough healing process. Afterward, I slept for 12 hours straight. I feel cleared and actually look beautiful as I was before. Thank you! </p>
 </font>
 </p>
+    -->
