@@ -76,16 +76,19 @@ namespace project_reiki.Models
             }
         }
 
-        public int Insert_Booking(string start_time, string session_type, string date)
+        public int Insert_Booking(string name_booking, string email_booking, string phone, string start_time, string session_type, string date)
         {
             try
             {
                 int id = -1;
-                string query = "INSERT INTO booking (Start_time, Session_type, Date) VALUES(@time, @session, @dt)";
+                string query = "INSERT INTO booking (Name, Email, Phone, Start_time, Session_type, Date) VALUES(@name, @email, @phone, @time, @session, @dt)";
                 
                 if (this.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@name", name_booking);
+                    cmd.Parameters.AddWithValue("@email", email_booking);
+                    cmd.Parameters.AddWithValue("@phone", phone);
                     cmd.Parameters.AddWithValue("@time", start_time);
                     cmd.Parameters.AddWithValue("@session", session_type);
                     cmd.Parameters.AddWithValue("@dt", date);
@@ -184,4 +187,3 @@ namespace project_reiki.Models
 
     } //db_connect class
 } // namespace
-

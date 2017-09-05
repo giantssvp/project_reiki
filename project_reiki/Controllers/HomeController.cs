@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using project_reiki.Models;
+using System.Net.Mail;
 
 namespace project_reiki.Controllers
 {
@@ -63,10 +64,54 @@ namespace project_reiki.Controllers
             return View();
         }
 
-        public ActionResult submit_btn_booking(string date, string time_slot, string session_name)
+        public ActionResult submit_btn_booking(string name_booking, string email_booking, string phone, string date, string time_slot, string session_name)
         {
             var obj = new db_connect();
-            obj.Insert_Booking(time_slot, session_name, date);
+            obj.Insert_Booking(name_booking, email_booking, phone, time_slot, session_name, date);
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("abcdtes26@gmail.com");
+            mail.To.Add("abcdtes26@gmail.com");
+            mail.Subject = "Booking : " + name_booking  + " : "+ date  + " : " + time_slot + " : " + session_name;
+            mail.IsBodyHtml = true;
+            string htmlBody;
+            string am_pm = " PM";
+
+            if(Int32.Parse(time_slot) == 10)
+            {
+                am_pm = " AM";
+            }
+
+            string time = "";
+            int end_time = Int32.Parse(time_slot) + 1;
+            if (Int32.Parse(time_slot) == 12)
+            {
+                time = time_slot + " - 1" + am_pm;
+            }
+            else
+            {
+                time = time_slot + " - " + end_time + am_pm;
+            }
+
+            htmlBody = "<html> <head>  </head> <body>" +
+                        "<table border=\"1\" style=\"font - family:Georgia, Garamond, Serif; width: 100 %; color: blue; font - style:italic; \"> <tr bgcolor=\"#00FFFF\" align=\"center\"> <th> Name </th> <th> Email </th> <th> Phone </th> <th> Date </th> <th> Time </th> <th> Session </th>  </tr> <tr align=\"center\"> " +
+                        "<td>" + name_booking + "</td>" +
+                        "<td>" + email_booking + "</td>" +
+                        "<td>" + phone + "</td>" +
+                        "<td>" + date + "</td>" +
+                        "<td>" + time + "</td>" +
+                        "<td>" + session_name + "</td>" +
+                        "</tr> </table> </body> </html> ";
+           
+            mail.Body = htmlBody;
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("abcdtes26@gmail.com", "9921642540");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
             return RedirectToAction("Booking","Home");
         }
 
