@@ -153,6 +153,7 @@
   <ItemGroup>
     <Content Include="Content\jquery.tabs.css" />
     <Content Include="Content\templatemo_style.css" />
+    <Content Include="db_schema.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

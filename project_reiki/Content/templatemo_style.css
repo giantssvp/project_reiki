@@ -252,7 +252,18 @@ em { color: #000; }
 	border: 1px solid #cfcfcf; 
 }
 
-#contact_form form label { display: block; width: 100px; margin-right: 10px; font-size: 14px; }
+#contact_form form .dropdown_field {
+    color: #333;
+    width: 390px;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #f6f6f6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border: 1px solid #cfcfcf;
+}
+
+#contact_form form label { display: block; width: 200px; margin-right: 10px; font-size: 14px; }
 
 #contact_form form textarea { 
 	color: #333; 
@@ -272,7 +283,7 @@ em { color: #000; }
 
 #booking_form form .input_field {
     color: #333;
-    width: 150px;
+    width: 350px;
     padding: 5px;
     margin-bottom: 10px;
     background: #f6f6f6;

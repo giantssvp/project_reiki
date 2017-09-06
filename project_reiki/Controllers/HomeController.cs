@@ -27,10 +27,36 @@ namespace project_reiki.Controllers
             return View();
         }
 
-        public ActionResult submit_btn_contact(string name, string email, string subject, string message)
+        public ActionResult submit_btn_contact(string name, string email, string comment_type, string subject, string message)
         {
             var obj = new db_connect();
-            obj.Insert(name, email, subject, message);
+            obj.Insert(name, email, comment_type, subject, message);
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("abcdtes26@gmail.com");
+            mail.To.Add("abcdtes26@gmail.com");
+            mail.Subject = "Contact : " + name + " : " + comment_type;
+            mail.IsBodyHtml = true;
+            string htmlBody;
+            
+            htmlBody = "<html> <head>  </head> <body>" +
+                        "<table border=\"1\" style=\"font - family:Georgia, Garamond, Serif; width: 100 %; color: blue; font - style:italic; \"> <tr bgcolor=\"#00FFFF\" align=\"center\"> <th> Name </th> <th> Email </th> <th> Comment Type </th> <th> Subject </th> <th> Message </th>  </tr> <tr align=\"center\"> " +
+                        "<td>" + name + "</td>" +
+                        "<td>" + email + "</td>" +
+                        "<td>" + comment_type + "</td>" +
+                        "<td>" + subject + "</td>" +
+                        "<td>" + message + "</td>" +
+                        "</tr> </table> </body> </html> ";
+
+            mail.Body = htmlBody;
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("abcdtes26@gmail.com", "9921642540");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
             return RedirectToAction("Contact", "Home");
         }
 

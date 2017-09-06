@@ -44,18 +44,19 @@ namespace project_reiki.Models
             }
         }
 
-        public int Insert(string name, string email, string sub, string msg)
+        public int Insert(string name, string email, string comment_type, string sub, string msg)
         {
             try
             {
                 int id = -1;
-                string query = "INSERT INTO testimony (Name, Email_id, Subject, Message, Status, Date) VALUES(@name, @email, @sub, @msg, @sts, CURDATE())";
+                string query = "INSERT INTO testimony (Name, Email_id, Comment_type, Subject, Message, Status, Date) VALUES(@name, @email, @com_type, @sub, @msg, @sts, CURDATE())";
 
                 if (this.OpenConnection() == true)
                 {
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@com_type", comment_type);
                     cmd.Parameters.AddWithValue("@sub", sub);
                     cmd.Parameters.AddWithValue("@msg", msg);
                     cmd.Parameters.AddWithValue("@sts", false);
@@ -80,7 +81,6 @@ namespace project_reiki.Models
         {
             try
             {
-                int id = -1;
                 string query = "INSERT INTO booking (Name, Email, Phone, Start_time, Session_type, Date) VALUES(@name, @email, @phone, @time, @session, @dt)";
                 
                 if (this.OpenConnection() == true)
@@ -94,12 +94,9 @@ namespace project_reiki.Models
                     cmd.Parameters.AddWithValue("@dt", date);
                     cmd.ExecuteNonQuery();
 
-                    MySqlCommand cmd1 = new MySqlCommand("SELECT LAST_INSERT_ID()", connection);
-                    id = Convert.ToInt32(cmd1.ExecuteScalar());
-
                     this.CloseConnection();
                 }
-                return id;
+                return 0;
             }
             catch (MySqlException ex)
             {
@@ -113,7 +110,7 @@ namespace project_reiki.Models
             try
             {
                 //string query = "SELECT * FROM testimony ORDER BY Date DESC, ID DESC LIMIT 2 OFFSET @offset";
-                string query = "SELECT * FROM testimony";
+                string query = "SELECT * FROM testimony where Comment_type='Testimony'";
 
                 list_feedback_show[0] = new List<string>();
                 list_feedback_show[1] = new List<string>();
