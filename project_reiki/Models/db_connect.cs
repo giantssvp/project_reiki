@@ -100,8 +100,8 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
-                return -1;
+                System.Windows.Forms.MessageBox.Show(ex.Message.ToString());
+                return ex.Number;
             }
         }
 
