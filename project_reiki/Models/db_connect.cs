@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 
-namespace project_reiki.Models
+namespace db
 {
     public class db_connect
     {
@@ -16,7 +16,7 @@ namespace project_reiki.Models
         private bool OpenConnection()
         {
             string connetionString = null;
-            connetionString = "server=localhost;database=reiki_healing;uid=root;pwd=password;Allow User Variables=True;";
+            connetionString = "server=182.50.133.77;database=reiki_healing;uid=mokshhealing;pwd=Mokshhealing@123;Allow User Variables=True;";
             connection = new MySqlConnection(connetionString);
             try
             {
@@ -25,7 +25,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Open: " + ex.ToString() + ");</script>");
                 return false;
             }
         }
@@ -39,7 +39,6 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return false;
             }
         }
@@ -72,7 +71,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Insert: " + ex.ToString() + ");</script>");
                 return -1;
             }
         }
@@ -100,7 +99,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message.ToString());
+                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Insert_Booking: " + ex.ToString() + ");</script>");
                 return ex.Number;
             }
         }
@@ -109,6 +108,8 @@ namespace project_reiki.Models
         {
             try
             {
+                //HttpContext.Current.Response.Write("testing message");
+                //HttpContext.Current.Response.Write(@"<script language='javascript'>alert('RESETTER PFNO: \\n" + "strErrorDesc" + " \\n BELONGS TO AN OFFICER OF CPPC');</script>");
                 //string query = "SELECT * FROM testimony ORDER BY Date DESC, ID DESC LIMIT 2 OFFSET @offset";
                 string query = "SELECT * FROM testimony where Comment_type='Testimony'";
 
@@ -140,7 +141,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Testimony_show: " + ex.ToString() + ");</script>");
                 return list_feedback_show;
             }
         }
@@ -177,7 +178,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Time_slot_show: " + ex.ToString() + ");</script>");
                 return list_time_show;
             }
         }
