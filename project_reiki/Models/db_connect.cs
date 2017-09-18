@@ -16,7 +16,7 @@ namespace project_reiki.Models
         private bool OpenConnection()
         {
             string connetionString = null;
-            connetionString = "server=localhost;database=reiki_healing;uid=root;pwd=password;Allow User Variables=True;";
+            connetionString = "server=182.50.133.77;database=reiki_healing;uid=mokshhealing;pwd=Mokshhealing@123;Allow User Variables=True;";
             connection = new MySqlConnection(connetionString);
             try
             {
@@ -25,7 +25,7 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                
                 return false;
             }
         }
@@ -39,7 +39,6 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return false;
             }
         }
@@ -72,7 +71,6 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return -1;
             }
         }
@@ -100,7 +98,6 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message.ToString());
                 return ex.Number;
             }
         }
@@ -140,7 +137,6 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return list_feedback_show;
             }
         }
@@ -177,7 +173,6 @@ namespace project_reiki.Models
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return list_time_show;
             }
         }
