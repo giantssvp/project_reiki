@@ -48,6 +48,7 @@ namespace project_reiki.Controllers
             try
             { 
                 var obj = new db_connect();
+                var msg = "";
                 obj.Insert(name, email, comment_type, subject, message);
 
                 MailMessage mail = new MailMessage();
@@ -76,7 +77,7 @@ namespace project_reiki.Controllers
                 //SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
-
+                TempData["AlertMessage"] = "Your details saved successfully, We will get back to you shortly.";
                 return RedirectToAction("Contact", "Home");
             }
             catch (Exception ex)
@@ -121,6 +122,7 @@ namespace project_reiki.Controllers
             try
             { 
                 var obj = new db_connect();
+                var msg = "";
                 var ret = obj.Insert_Booking(name_booking, email_booking, phone, time_slot, session_name, date);
                         
                 if (ret == 0)
@@ -169,16 +171,17 @@ namespace project_reiki.Controllers
                     //SmtpServer.EnableSsl = true;
 
                     SmtpServer.Send(mail);
-                    System.Web.HttpContext.Current.Response.Write("<script>alert('Your appoinment is booked successfully. Thank You!!')</script>");
+                    msg = "Your appoinment is booked successfully. Thank You!!";
                 }
                 else if (ret == 1062)
                 {
-                    System.Web.HttpContext.Current.Response.Write("<script>alert('This slot is already booked by another user, Please book another time slot. Thank You!!')</script>");
+                    msg = "This slot is already booked by another user, Please book another time slot. Thank You!!";
                 }
                 else
                 {
-                    System.Web.HttpContext.Current.Response.Write("<script>alert('There is some issue with booking, Please try again. Thank You!!')</script>");
+                    msg = "There is some issue with booking, Please try again. Thank You!!";
                 }
+                TempData["AlertMessage"] = msg;
                 return RedirectToAction("Booking","Home");
             }
             catch (Exception ex)
