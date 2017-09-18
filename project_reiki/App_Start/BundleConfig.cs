@@ -22,7 +22,7 @@ namespace project_reiki
             
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/jquery.tabs.css",
-                      "~/Content/social_media.css",                      
+                      "~/Content/social_media.css",
                       "~/Content/templatemo_style.css"));
         }
     }

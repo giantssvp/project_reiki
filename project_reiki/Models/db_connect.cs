@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 
-namespace db
+namespace project_reiki.Models
 {
     public class db_connect
     {
@@ -25,7 +25,7 @@ namespace db
             }
             catch (MySqlException ex)
             {
-                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Open: " + ex.ToString() + ");</script>");
+                
                 return false;
             }
         }
@@ -71,7 +71,6 @@ namespace db
             }
             catch (MySqlException ex)
             {
-                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Insert: " + ex.ToString() + ");</script>");
                 return -1;
             }
         }
@@ -99,7 +98,6 @@ namespace db
             }
             catch (MySqlException ex)
             {
-                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Insert_Booking: " + ex.ToString() + ");</script>");
                 return ex.Number;
             }
         }
@@ -108,8 +106,6 @@ namespace db
         {
             try
             {
-                //HttpContext.Current.Response.Write("testing message");
-                //HttpContext.Current.Response.Write(@"<script language='javascript'>alert('RESETTER PFNO: \\n" + "strErrorDesc" + " \\n BELONGS TO AN OFFICER OF CPPC');</script>");
                 //string query = "SELECT * FROM testimony ORDER BY Date DESC, ID DESC LIMIT 2 OFFSET @offset";
                 string query = "SELECT * FROM testimony where Comment_type='Testimony'";
 
@@ -141,7 +137,6 @@ namespace db
             }
             catch (MySqlException ex)
             {
-                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Testimony_show: " + ex.ToString() + ");</script>");
                 return list_feedback_show;
             }
         }
@@ -178,7 +173,6 @@ namespace db
             }
             catch (MySqlException ex)
             {
-                HttpContext.Current.Response.Write(@"<script language='javascript'>alert('Time_slot_show: " + ex.ToString() + ");</script>");
                 return list_time_show;
             }
         }
