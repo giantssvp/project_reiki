@@ -12,6 +12,12 @@
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBiZbK_ycQUlATsTiFMzbpGF50zSFgfSfg"></script>
 
+    <style>
+        #slide {
+            border-radius: 10px;
+        }
+    </style>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -38,14 +44,14 @@
             </div> <!-- end of menu -->
 
             <div id="templatemo_middle">
-                <img class="mySlides" src=@Url.Content("~/images/image_slide1.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide2.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide3.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide4.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide5.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide6.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide7.jpg") style="width:100%" />
-                <img class="mySlides" src=@Url.Content("~/images/image_slide8.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide1.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide2.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide3.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide4.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide5.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide6.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide7.jpg") style="width:100%" />
+                <img class="mySlides" id="slide" src=@Url.Content("~/images/image_slide8.jpg") style="width:100%" />
             </div>
 
             <div id="templatemo_main_base">
