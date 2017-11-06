@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using project_reiki.Models;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Windows.Forms;
 
 namespace project_reiki.Controllers
 {
     public class HomeController : Controller
-    {
+    {        
         public static string mailServer     =   "relay-hosting.secureserver.net";
         public static string mailFrom       =   "admin@mokshhealing.com.au";
         public static string mailTo         =   "admin@mokshhealing.com.au";
@@ -108,6 +109,16 @@ namespace project_reiki.Controllers
             return View();
         }
 
+        public ActionResult News()
+        {
+            var obj = new db_connect();
+            List<string>[] list = new List<string>[3];
+            list = obj.news_show();
+            ViewBag.list = list;
+            ViewBag.total = list[0].Count();
+            return View();
+        }
+
         public ActionResult Disclaimer()
         {
             return View();
@@ -116,6 +127,88 @@ namespace project_reiki.Controllers
         public ActionResult Booking()
         {
             return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Newsfeed()
+        {
+            try
+            {
+                string session_status = HttpContext.Session["user"].ToString();
+                if (Int32.Parse(session_status) == 0)
+                    return RedirectToAction("Login", "Home");
+                else
+                    return View();
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Session.Add("user", 0);
+                System.Web.HttpContext.Current.Response.Write("<script>alert('There is some issue while saving the details, please try again, Thanks.')</script>");
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
+
+
+        public ActionResult login_btn(string username, string password)
+        {
+            try
+            {
+                var obj = new db_connect();
+                
+                if (obj.Login(username, password)) { 
+                    TempData["AlertMessage"] = "Logged in successfully";
+                    HttpContext.Session.Add("user",1); 
+                    return RedirectToAction("Newsfeed", "Home");
+                    
+                }
+                else {  
+                    TempData["AlertMessage"] = "Your username or password is not correct";
+                    HttpContext.Session.Add("user", 0);
+                    return RedirectToAction("Login", "Home");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Session.Add("user", 0);
+                System.Web.HttpContext.Current.Response.Write("<script>alert('There is some issue while saving the details, please try again, Thanks.')</script>");
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
+        public ActionResult submit_news_btn(string heading, string description)
+        {
+            try
+            {
+                var obj = new db_connect();
+                obj.Insert_News(heading, description);
+                return RedirectToAction("Newsfeed", "Home");
+            }
+            catch (Exception ex)
+            {
+                System.Web.HttpContext.Current.Response.Write("<script>alert('There is some issue while saving the details, please try again, Thanks.')</script>");
+                return RedirectToAction("Newsfeed", "Home");
+            }
+        }
+
+        public ActionResult logout_btn(string heading, string description)
+        {
+            try
+            {               
+                HttpContext.Session.Add("user", 0);
+                System.Web.HttpContext.Current.Response.Write("<script>alert('There is some issue while saving the details, please try again, Thanks.')</script>");
+                return RedirectToAction("Login", "Home");
+            }
+            catch (Exception ex)
+            {
+                System.Web.HttpContext.Current.Response.Write("<script>alert('There is some issue while saving the details, please try again, Thanks.')</script>");
+                return RedirectToAction("Login", "Home");
+            }
         }
 
         public ActionResult submit_btn_booking(string name_booking, string email_booking, string phone, string date, string time_slot, string session_name)

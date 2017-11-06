@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
-
+using System.Windows.Forms;
 namespace project_reiki.Models
 {
     public class db_connect
@@ -12,6 +12,8 @@ namespace project_reiki.Models
         public List<string>[] list_feedback_show = new List<string>[3];
         public List<string>[] list_time_show = new List<string>[1];
         public List<string>[] list_gallery_show = new List<string>[2];
+
+        public List<string>[] list_news_show = new List<string>[3];
 
         private bool OpenConnection()
         {
@@ -48,7 +50,7 @@ namespace project_reiki.Models
             try
             {
                 int id = -1;
-                string query = "INSERT INTO testimony (Name, Email_id, Comment_type, Subject, Message, Status, Date) VALUES(@name, @email, @com_type, @sub, @msg, @sts, CURDATE())";
+                string query = "INSERT INTO testimony (Name, Email_id, Comment_type, Subject, Message, Status, Date) VALUES(@name, @email, @com_type, @sub, @msg, @sts, NOW())";
 
                 if (this.OpenConnection() == true)
                 {
@@ -176,6 +178,101 @@ namespace project_reiki.Models
                 return list_time_show;
             }
         }
+
+        /*News Section */
+        public List<string>[] news_show()
+        {
+            try
+            {
+                string query = "SELECT * FROM news ORDER BY ID DESC";
+
+                list_news_show[0] = new List<string>();
+                list_news_show[1] = new List<string>();
+                list_news_show[2] = new List<string>();
+
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        list_news_show[0].Add(dataReader["Heading"] + "");
+                        list_news_show[1].Add(dataReader["Description"] + "");
+                        list_news_show[2].Add(dataReader["Date"] + "");
+                    }
+
+                    dataReader.Close();
+                    this.CloseConnection();
+                    return list_news_show;
+                }
+                else
+                {
+                    return list_news_show;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                return list_news_show;
+            }
+        }
+
+        public int Insert_News(string heading, string description)
+        {
+            try
+            {
+                int id = -1;
+                string query = "INSERT INTO news (Heading, Description, Date) VALUES(@heading, @description, NOW())";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@heading", heading);
+                    cmd.Parameters.AddWithValue("@description", description);
+         
+                    cmd.ExecuteNonQuery();
+                                        
+                    this.CloseConnection();
+                }
+                return id;
+            }
+            catch (MySqlException ex)
+            {
+                return -1;
+            }
+        }
+        /*News Section*/
+
+        /*Login Section*/
+        public Boolean Login(string name, string password)
+        {
+            try
+            {
+                MySqlDataReader rdr;
+                string query = "select * from login where username = @name and password = @password";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@password", password);                   
+                    rdr = cmd.ExecuteReader();
+                    if (rdr.Read())
+                    {
+                        this.CloseConnection();
+                        return true;
+                    }
+                }
+                this.CloseConnection();
+                return false;
+            }
+            catch (MySqlException ex)
+            {
+                return false;
+            }
+        }
+        /*Login Section*/
 
     } //db_connect class
 } // namespace
