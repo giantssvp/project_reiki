@@ -11,21 +11,20 @@ namespace project_reiki.Controllers
 {
     public class HomeController : Controller
     {
-        /*
         public static string mailServer     =   "relay-hosting.secureserver.net";
         public static string mailFrom       =   "admin@mokshhealing.com.au";
         public static string mailTo         =   "admin@mokshhealing.com.au";
         public static string mailBCC        =   "admin@mokshhealing.com.au";
         public static string mailPassword   =   "Mokshhealing@123";  
 
-        */
+        /*
         public static string mailServer     =   "smtp.gmail.com";
         public static string mailFrom       =   "abcdtes26@gmail.com";
         public static string mailTo         =   "abcdtes26@gmail.com";
         public static string mailBCC        =   "abcdtes26@gmail.com";
         public static string mailPassword   =   "9921642540";
 
-        
+        */
         public ActionResult Index()
         {
             return View();
@@ -60,7 +59,7 @@ namespace project_reiki.Controllers
                 mail.Bcc.Add(mailBCC);
                 mail.Subject = "Contact : " + name + " : " + comment_type;
                 mail.IsBodyHtml = true;
-                /*
+                
                 string htmlBody;
                            
                 htmlBody = "<html> <head>  </head> <body>" +
@@ -72,32 +71,11 @@ namespace project_reiki.Controllers
                             "<td>" + subject + "</td>" +
                             "<td>" + message + "</td>" +
                             "</tr> </table> </body> </html> ";
-                */
-                string htmlBody = "<html><body><h1>Picture</h1><br><img src=\"cid:filename\"></body></html>";
-                AlternateView avHtml = AlternateView.CreateAlternateViewFromString
-                   (htmlBody, null, MediaTypeNames.Text.Html);
-                string path = Server.MapPath(@"images/icon_01.png");
-                LinkedResource inline = new LinkedResource(path);
-                inline.ContentId = Guid.NewGuid().ToString();
-                avHtml.LinkedResources.Add(inline);
 
-                //MailMessage mail = new MailMessage();
-                mail.AlternateViews.Add(avHtml);
-                
-                //Attachment att = new Attachment("../images/icon_01.jpg");
-                //att.ContentDisposition.Inline = true;
-
-                mail.Body = String.Format(
-                           "<h3>Client:  Has Sent You A Screenshot</h3>" +
-                           @"<img src=""cid:{0}"" />", inline.ContentId);
-
-                //mail.IsBodyHtml = true;
-                //mail.Attachments.Add(att);
-
-                //mail.Body = htmlBody;
-                SmtpServer.Port = 587;
+                mail.Body = htmlBody;
+                //SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential(mailFrom, mailPassword);
-                SmtpServer.EnableSsl = true;
+                //SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
                 TempData["AlertMessage"] = "Your details saved successfully, We will get back to you shortly.";
