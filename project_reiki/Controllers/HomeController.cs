@@ -112,7 +112,7 @@ namespace project_reiki.Controllers
         public ActionResult News()
         {
             var obj = new db_connect();
-            List<string>[] list = new List<string>[3];
+            List<string>[] list = new List<string>[4];
             list = obj.news_show();
             ViewBag.list = list;
             ViewBag.total = list[0].Count();

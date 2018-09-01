@@ -41,29 +41,34 @@
     </div>
 </section>
 <section id="contentSection">
-<div class="row">
+    <div class="row">
 
-    @for (var i = 0; i < cnt; i++)
-    {
-        <div class="col-lg-8 col-md-8 col-sm-8">
-            <div class="left_content">
-                <div class="single_page">               
-                   <font size="4" color="#af0083"> @results[0][i]</font>
-                    <div class="post_commentbox"> 
-                        <span><i class="fa fa-calendar"></i>@results[2][i]</span> 
+        @for (var i = 0; i < cnt; i++)
+        {
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="left_content">
+                    <div class="single_page">
+                        <font size="4" color="#af0083"> @results[0][i]</font>
+                        <div class="post_commentbox">
+                            <span><i class="fa fa-calendar"></i>@results[2][i]</span>
+                        </div>
+                        <div class="single_page_content">
+                            <div style="width:10%; float:left;">
+                                <img src=@results[3][i] alt="">
+                            </div>
+                            <div style="width:90%; float:left;">
+                                <p align="justify"> @results[1][i] </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="single_page_content">
-                        <p> @results[1][i] </p>
-                    </div>
+                    <br /><br />
                 </div>
-                <br /><br />
             </div>
-            
-        </div>
-        
-    }
 
-</div>
+        }
+        <br/>
+        
+    </div>
 </section>
 </div>
 

@@ -13,12 +13,12 @@ namespace project_reiki.Models
         public List<string>[] list_time_show = new List<string>[1];
         public List<string>[] list_gallery_show = new List<string>[2];
 
-        public List<string>[] list_news_show = new List<string>[3];
+        public List<string>[] list_news_show = new List<string>[4];
 
         private bool OpenConnection()
         {
             string connetionString = null;
-            connetionString = "server=182.50.133.77;database=reiki_healing;uid=mokshhealing;pwd=Mokshhealing@123;Allow User Variables=True;";
+            connetionString = "server=182.50.133.77;database=reiki_healing;uid=mokshhealing;pwd=Mokshhealing@123;Allow User Variables=True;SslMode=none";
             connection = new MySqlConnection(connetionString);
             try
             {
@@ -189,7 +189,7 @@ namespace project_reiki.Models
                 list_news_show[0] = new List<string>();
                 list_news_show[1] = new List<string>();
                 list_news_show[2] = new List<string>();
-
+                list_news_show[3] = new List<string>();
 
                 if (this.OpenConnection() == true)
                 {
@@ -201,6 +201,7 @@ namespace project_reiki.Models
                         list_news_show[0].Add(dataReader["Heading"] + "");
                         list_news_show[1].Add(dataReader["Description"] + "");
                         list_news_show[2].Add(dataReader["Date"] + "");
+                        list_news_show[3].Add(dataReader["Image_Name"] + "");
                     }
 
                     dataReader.Close();
