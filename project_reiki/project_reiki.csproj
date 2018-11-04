@@ -286,6 +286,10 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Newsfeed.cshtml" />
+    <Content Include="Views\Home\Distance.cshtml" />
+    <Content Include="Views\Home\Reiki.cshtml" />
+    <Content Include="Views\Home\Crystal.cshtml" />
+    <Content Include="Views\Home\Pellowah.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

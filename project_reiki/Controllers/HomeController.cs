@@ -119,6 +119,27 @@ namespace project_reiki.Controllers
             return View();
         }
 
+        public ActionResult Distance()
+        {
+            return View();
+        }
+
+        public ActionResult Reiki()
+        {
+            return View();
+        }
+
+        public ActionResult Crystal()
+        {
+            return View();
+        }
+
+        public ActionResult Pellowah()
+        {
+            return View();
+        }
+
+
         public ActionResult Disclaimer()
         {
             return View();
